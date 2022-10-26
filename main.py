@@ -50,7 +50,7 @@ TP3_1 = [[1, 0, 0],
 
 
 
-def show_confusion_matrix(title,  ):
+def show_confusion_matrix(title  ):
     confusion_matrix = metrics.confusion_matrix()
 
     cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [False, True])
@@ -167,17 +167,27 @@ print("RESULTADO SVM DATOS ORIGINALES: ", clf.predict(TP3_withouth_x0))
 # SVM TP3_2
 clf2 = svm.SVC()
 clf2.fit(TP3_withouth_x0, y1)
+result_TP3_2 = clf2.predict(TP3_withouth_x0)
 print("CLASE MAL CLASIFICADA: ", y1)
-print("RESULTADO SVM DATOS MAL CLASIFICADOS: ", clf2.predict(TP3_withouth_x0))
+print("RESULTADO SVM DATOS MAL CLASIFICADOS: ", result_TP3_2)
 
 
 ## Comparar resultados punto c con punto a
 
 
+
 confusion_matrix = metrics.confusion_matrix(y, result_TP3 )
 cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [False, True])
 cm_display.plot()
-plt.title("CLASE VERDADERA Y RESULTADO DEL PERCEPTRON SIMPLE")
+plt.title("CLASE VERDADERA Y RESULTADO")
+plt.ylabel('Clase resultado')
+plt.xlabel('Clase verdadera')
+plt.show()
+
+confusion_matrix = metrics.confusion_matrix(y, result_TP3_2 )
+cm_display = metrics.ConfusionMatrixDisplay(confusion_matrix = confusion_matrix, display_labels = [False, True])
+cm_display.plot()
+plt.title("CLASE VERDADERA DE DATOS MAL CLASIFICADOS Y RESULTADO")
 plt.ylabel('Clase resultado')
 plt.xlabel('Clase verdadera')
 plt.show()
@@ -185,39 +195,26 @@ plt.show()
 
 
 # Clase cielo: 0 pasto: 1 vaca: 2
-examples_class = [0, 1, 2]
+examples_class = [0,1,2]
 examples = ["cielo", "pasto", "vaca"]
 
 
-images = ([cv.imread(img_name+".jpg") for i, img_name in enumerate(examples)])
+
 
 
 # i -> clase
 images_with_class = []
-""" for i,img in enumerate(images):
-    row, column, _ = img.shape
-    range_row = 100
-    range_col = 100
-    for irow in range(range_row):
-        for icol in range(range_col):
-            pixel_class = []
-            for color in img[random.randint(0,row-1),random.randint(0,column-1)]:
-                pixel_class.append(color)
-            pixel_class.append(examples_class[i])
-            images_with_class.append(pixel_class)
-             """
+
+images = ([cv.imread(img_name+".jpg") for i, img_name in enumerate(examples)])
+
 for i, img in enumerate(images):
     row, column, _ = img.shape
     _range = 4000
     for irow in range(_range):
         pixel_class = []
-
-        # print(len(img[random.randint(0,row-1),random.randint(0,column-1),:].tolist()), end=",")
         for color in img[random.randint(0, row-1), random.randint(0, column-1), :].tolist():
             pixel_class.append(color)
-        #print(len(pixel_class), end="-")
         pixel_class.append(examples_class[i])
-        #print(pixel_class[len(pixel_class)-1], end=",")
         images_with_class.append(pixel_class)
 
 
@@ -284,7 +281,7 @@ def make_img(image, clf):
     cv.waitKey(0)
 
 
-# make_img(cow_1,clflinear)
+make_img(cow_1,clflinear)
 # make_img(cow_1,clfpoly)
 # make_img(cow_1,clfrbf)
 cow_test = cv.imread("cow-test-2.jpg")

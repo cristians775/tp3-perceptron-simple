@@ -16,7 +16,7 @@ class Perceptron():
         j = 0
         while(error>0 and j < self.itr ):
             for i in range(len(X)):
-                o = self.predict(X[i], w)
+                o = self.calculate(X[i], w)
                 error = y[i]-o
                 # Calculamos delta w -> (etha * error) * [w0, w1, w2]
                 etha_error = self.eta * error
@@ -28,7 +28,7 @@ class Perceptron():
         return w
                 
        
-    def predict(self, X,w):
+    def calculate(self, X,w):
        
         # Calculamos h -> sumatoria wi * xi
         h = sum([(w[i] * x) for i, x in enumerate(X)])
