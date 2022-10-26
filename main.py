@@ -214,7 +214,7 @@ for i, img in enumerate(images):
         pixel_class = []
         for color in img[random.randint(0, row-1), random.randint(0, column-1), :].tolist():
             pixel_class.append(color)
-        pixel_class.append(examples_class[i])
+        pixel_class.append(i)
         images_with_class.append(pixel_class)
 
 
@@ -254,7 +254,7 @@ result_linear_test = clflinear.predict(Xtest)
 # Entrenando con kernel polinomial
 
 clfpoly = svm.SVC(kernel="poly")
-clfpoly.fit(Xtraining_set, ytraining_set, )
+clfpoly.fit(Xtraining_set, ytraining_set)
 result_polinomial_test = clfpoly.predict(Xtest)
 # print("POLINOMIAL TEST", result_polinomial_test)
 
