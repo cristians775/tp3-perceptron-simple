@@ -281,7 +281,7 @@ def make_img(image, clf):
     cv.waitKey(0)
 
 
-make_img(cow_1,clflinear)
+#make_img(cow_1,clflinear)
 # make_img(cow_1,clfpoly)
 # make_img(cow_1,clfrbf)
 cow_test = cv.imread("cow-test-2.jpg")
