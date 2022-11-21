@@ -1,7 +1,7 @@
 import random
 import numpy as np
 class Perceptron():
-    def __init__(self, eta=0.1, itr=20000):
+    def __init__(self, eta=0.1, itr=30000):
         self.eta = eta
         self.itr = itr
         
@@ -20,7 +20,6 @@ class Perceptron():
                 X_random =X[random_index]
                 Y_random =y[random_index]
                 o = self.calculate_o(X_random, w)
-                
                 # Calculamos delta w -> (etha * error) * [w0, w1, w2]
                 etha_error = self.eta * (Y_random-o)
                 _w = [el * etha_error for i,el in enumerate(X_random)]

@@ -245,7 +245,7 @@ Xtraining_set, ytraining_set = split_class(training_set)
 
 
 # Entrenando con kernel lineal
-clflinear = svm.SVC(kernel="linear")
+clflinear = svm.SVC(kernel="linear", C=100)
 # print("Ytest",ytraining_set)
 clflinear.fit(Xtraining_set, ytraining_set)
 
@@ -253,13 +253,13 @@ result_linear_test = clflinear.predict(Xtest)
 # print("LINEAR TEST", result_linear_test)
 # Entrenando con kernel polinomial
 
-clfpoly = svm.SVC(kernel="poly")
+clfpoly = svm.SVC(kernel="poly", C=1000)
 clfpoly.fit(Xtraining_set, ytraining_set)
 result_polinomial_test = clfpoly.predict(Xtest)
 # print("POLINOMIAL TEST", result_polinomial_test)
 
 # Entrenando con kernel rdf
-clfrbf = svm.SVC(kernel="rbf")
+clfrbf = svm.SVC(kernel="rbf", C=100)
 clfrbf.fit(Xtraining_set, ytraining_set)
 result_rbf_test = clfrbf.predict(Xtest)
 # print("RBF TEST", result_rbf_test)
@@ -286,6 +286,6 @@ def make_img(image, clf):
 # make_img(cow_1,clfrbf)
 cow_test = cv.imread("cow-test-2.jpg")
 #print("COW", cow_test)
-# make_img(cow_test,clflinear)
+make_img(cow_test,clflinear)
 # make_img(cow_test,clfpoly)
 # make_img(cow_test,clfrbf)
